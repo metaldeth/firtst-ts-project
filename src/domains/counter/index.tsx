@@ -9,6 +9,7 @@ type Props = {
     number: number;
 }
 
+
 interface StateProps {
     count: number;
 }
@@ -21,7 +22,10 @@ interface DispatchProps {
 
 type CounterProps = StateProps & DispatchProps & Props;
 
-const mapStateToProps = (state: ApplicationState, props: Props): StateProps => ({ count: state.counter.count });
+const mapStateToProps = (state: ApplicationState, props: Props) => ({
+    count: state.counter.count,
+    todo: state.todo
+});
 
 const mapDispatchToProps = (dispatch: Dispatch, props: Props): DispatchProps => ({
     increment: () => dispatch(counterActions.increment(props.number)),
