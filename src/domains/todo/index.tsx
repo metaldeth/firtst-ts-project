@@ -54,13 +54,14 @@ const TodoInner = (props: TodoProps) => {
             />
             <button onClick = {addTodo}>add todo</button>
             {props.todo.map((todoItem: string, index: number) => 
-            <ToDoItem
-                index={index}
-                text={todoItem}
-                remove={() => props.remove(index)}
-                edit={(todoItem) => props.edit(index, todoItem)}
-            />
-        )}
+                <ToDoItem
+                    key={index}
+                    index={index}
+                    text={todoItem}
+                    remove={() => props.remove(index)}
+                    edit={(content) => props.edit(index, content)}
+                />
+            )}
         </>
     )
 }
