@@ -4,21 +4,19 @@ import { Dispatch } from "redux";
 import { TodoState } from "../../redux/reducers/todo";
 import { ApplicationState } from "../../redux/store";
 import * as todoActions from "../../redux/actions/todo";
+import { ToDoItem } from "./todoItem";
 
-interface Props  {
-    content: string;
-    index: number;
-}
+interface Props {}
 
 interface StateProps {
-    todo: TodoState['todo']
+    todo: TodoState['list']
 }
 
-type AddFn = () => void
+type AddFn = (content: string) => void
 
-type EditFn = () => void
+type EditFn = (index: number, content: string) => void
 
-type RemoveFn = () => void
+type RemoveFn = (index: number) => void
 
 interface DispatchProps {
     add:  AddFn
@@ -28,21 +26,23 @@ interface DispatchProps {
 
 type TodoProps = StateProps & DispatchProps & Props
 
-const mapStateToProps = (state: ApplicationState, props: StateProps) => ({
-    count: state.counter.count,
-    todo: state.todo
+
+const mapStateToProps = (state: ApplicationState, props: Props): StateProps => ({
+    todo: state.todo.list
 });
 
 const mapDispatchToProps = (dispatch: Dispatch, props: Props): DispatchProps => ({
-    add: () => dispatch(todoActions.add(props.content)),
-    edit: () => dispatch(todoActions.edit(props.index, props.content)),
-    remove: () => dispatch(todoActions.remove(props.index)),
-  })
+    add: (content) => dispatch(todoActions.add(content)),
+    edit: (index, content) => dispatch(todoActions.edit(index, content)),
+    remove: (index) => dispatch(todoActions.remove(index)),
+})
 
 const TodoInner = (props: TodoProps) => {
     const [text, setText] = useState('');
 
     const addTodo = () => {
+        if (!text.length) return;
+        setText('');
         props.add(text)
     }
 
@@ -53,7 +53,14 @@ const TodoInner = (props: TodoProps) => {
                 onChange = {(event) => setText(event.target.value)}
             />
             <button onClick = {addTodo}>add todo</button>
-            {}
+            {props.todo.map((todoItem: string, index: number) => 
+            <ToDoItem
+                index={index}
+                text={todoItem}
+                remove={() => props.remove(index)}
+                edit={(content) => props.edit(index, todoItem)}
+            />
+        )}
         </>
     )
 }

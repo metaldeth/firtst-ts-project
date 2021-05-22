@@ -3,11 +3,11 @@ import * as actions from "../actions/todo";
 import { store } from "../store";
 
 export type TodoState = {
-    todo: string[]
+    list: string[]
 }
 
 const initState: TodoState = {
-    todo: []
+    list: []
 }
 
 export const todoReducer = (
@@ -19,7 +19,7 @@ export const todoReducer = (
                 const text = action.content
                 return {
                     ...state,
-                    todo: [ ...state.todo, text ]
+                    list: [ ...state.list, text ]
                 }
             };
             case types.EDIT:{
@@ -27,7 +27,7 @@ export const todoReducer = (
                 // const index = action.index;
                 // const content = action.content;
 
-                const updateTodo = state.todo.map((currentValue, itemIndex) => {
+                const updateList = state.list.map((currentValue, itemIndex) => {
                     if (itemIndex == index) {
                         return content
                     }
@@ -35,17 +35,17 @@ export const todoReducer = (
                 });
                 return {
                     ...state,
-                    todo: updateTodo
+                    list: updateList
                 }
             };
             case types.REMOVE:{
                 const { index } = action;
-                const updateTodo = state.todo.filter((currentValue, itemIndex) => {
+                const updateList = state.list.filter((currentValue, itemIndex) => {
                     return index != itemIndex;
                 })
                 return {
                     ...state,
-                    todo: updateTodo
+                    list: updateList
                 }
             };
         

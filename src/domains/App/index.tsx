@@ -1,6 +1,6 @@
 import { Link, Route, Switch } from 'react-router-dom';
 import { Counter } from '../counter';
-import {  } from '../todo'
+import { Todo } from '../todo'
 import './App.sass';
 
 
@@ -18,7 +18,7 @@ function App() {
             <Counter number={5}/>
           </Route>
           <Route exact path="/todo">
-            Hello World
+            <Todo />
           </Route>
           <Route exact path="/">
             Hello World
