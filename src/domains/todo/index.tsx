@@ -58,7 +58,7 @@ const TodoInner = (props: TodoProps) => {
                 index={index}
                 text={todoItem}
                 remove={() => props.remove(index)}
-                edit={(content) => props.edit(index, todoItem)}
+                edit={(todoItem) => props.edit(index, todoItem)}
             />
         )}
         </>
