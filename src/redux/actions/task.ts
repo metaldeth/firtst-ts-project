@@ -20,20 +20,20 @@ export type RemoveTask = {
 
 export type TaskActions = AddTask | EditTask | RemoveTask;
 
-export const add = (title: string, desc: string): AddTask => ({
+export const addTask = (title: string, desc: string): AddTask => ({
     type: ADD,
     title,
     desc
 })
 
-export const edit = (title: string, desc: string, index: number): EditTask => ({
+export const editTask = (title: string, desc: string, index: number): EditTask => ({
     type: EDIT,
     title,
     desc,
     index
 })
 
-export const remove = (index: number): RemoveTask => ({
+export const removeTask = (index: number): RemoveTask => ({
     type: REMOVE,
     index
 })

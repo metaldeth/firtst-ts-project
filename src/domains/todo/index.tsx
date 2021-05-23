@@ -32,9 +32,9 @@ const mapStateToProps = (state: ApplicationState, props: Props): StateProps => (
 });
 
 const mapDispatchToProps = (dispatch: Dispatch, props: Props): DispatchProps => ({
-    add: (content) => dispatch(todoActions.add(content)),
-    edit: (index, content) => dispatch(todoActions.edit(index, content)),
-    remove: (index) => dispatch(todoActions.remove(index)),
+    add: (content) => dispatch(todoActions.addTodo(content)),
+    edit: (index, content) => dispatch(todoActions.editTodo(index, content)),
+    remove: (index) => dispatch(todoActions.removeTodo(index)),
 })
 
 const TodoInner = (props: TodoProps) => {

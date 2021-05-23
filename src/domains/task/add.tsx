@@ -26,11 +26,11 @@ const mapStateToProps = (state: ApplicationState, props: Props): StateProps => (
 })
 
 const mapDispatchToProps = (dispatch: Dispatch, props: Props): DispatchProps => ({
-    add: (title: string, desc:string) => dispatch(taskActions.add(title, desc))
+    add: (title: string, desc:string) => dispatch(taskActions.addTask(title, desc))
 })
 
 
-const AddInner = (props: any) => {
+const AddInner = (props: TaskProps) => {
     const [title, setTitle] = useState('');
 
     const [desc, setDesc] = useState('');

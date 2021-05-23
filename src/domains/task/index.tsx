@@ -26,7 +26,7 @@ const mapStateToProps = (state: ApplicationState, props: Props): StateProps => (
 })
 
 const mapDispatchToProps = (dispatch: Dispatch, props: Props): DispatchProps => ({
-    remove: (index: number) => dispatch(taskActions.remove(index))
+    remove: (index: number) => dispatch(taskActions.removeTask(index))
 })
 
 const TaskInner = (props: TaskProps) => {

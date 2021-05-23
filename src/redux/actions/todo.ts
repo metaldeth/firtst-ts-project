@@ -16,18 +16,18 @@ export type RemoveTodo = {
 
 export type TodoActions = AddTodo | EditTodo | RemoveTodo;
 
-export const add = (content: string): AddTodo => ({
+export const addTodo = (content: string): AddTodo => ({
     type: ADD,
     content
 })
 
-export const edit = (index: number, content: string): EditTodo => ({
+export const editTodo = (index: number, content: string): EditTodo => ({
     type: EDIT,
     content,
     index
 })
 
-export const remove = (index: number): RemoveTodo => ({
+export const removeTodo = (index: number): RemoveTodo => ({
     type: REMOVE,
     index
 })
