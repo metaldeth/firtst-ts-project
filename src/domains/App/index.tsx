@@ -1,15 +1,17 @@
 import { FC } from "react"
 import { Link, Route, Switch, useParams } from 'react-router-dom';
 import { Counter } from '../counter';
-import { Todo } from '../todo'
+import { Todo } from '../todo';
+import { Task } from "../task";
+import { AddTask } from "../task/add";
 import './App.sass';
 
-const TestComp: FC<{}> = () => {
-  const params = useParams();
-  console.log(params);
+// const TestComp: FC<{}> = () => {
+//   const params = useParams();
+//   console.log(params);
   
-  return (<>task</>)
-}
+//   return (<>task</>)
+// }
 
 function App() {
   return (
@@ -30,13 +32,13 @@ function App() {
             <Todo />
           </Route>
           <Route exact path="/task">
-            Hello World
+            <Task />
           </Route>
           <Route exact path="/task/create">
-            Hello World
+            <AddTask />
           </Route>
           <Route exact path="/task/:id">
-            <TestComp/>
+            
           </Route>
           <Route exact path="/">
             Hello World
