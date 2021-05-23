@@ -1,3 +1,3 @@
-export const ADD = 'ADD';
-export const REMOVE = 'REMOVE';
-export const EDIT = 'EDIT';
+export const ADDTASK = 'ADDTASK';
+export const REMOVETASK = 'REMOVETASK';
+export const EDITTASK = 'EDITTASK';

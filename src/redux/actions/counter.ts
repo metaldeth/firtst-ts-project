@@ -1,4 +1,3 @@
-import { type } from 'os'
 import { INCREMENT, DECREMENT, CLEAR } from '../constants/counter'
 
 export type IncrementAction = {

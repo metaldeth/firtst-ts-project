@@ -20,7 +20,7 @@ export const taskReducer = (
     action: actions.TaskActions
 ): TaskState => {
     switch (action.type) {
-        case types.ADD: {
+        case types.ADDTASK: {
             const title = action.title;
             const desc = action.desc
             const task = {
@@ -32,10 +32,10 @@ export const taskReducer = (
                 tasks:[...state.tasks, task]
             }
         };
-        case types.EDIT: {
+        case types.EDITTASK: {
             const title = action.title;
             const desc = action.desc;
-            const index = action.index;
+            const index = action.indexTask;
             const task = {
                 title,
                 desc
@@ -51,8 +51,8 @@ export const taskReducer = (
                 tasks: updateList
             }
         }
-        case types.REMOVE: {
-            const index = action.index;
+        case types.REMOVETASK: {
+            const index = action.indexTask;
             const updateList = state.tasks.filter((currentValue, itemIndex) => {
                 return index != itemIndex;
             })
