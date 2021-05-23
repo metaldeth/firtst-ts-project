@@ -1,6 +1,5 @@
 import * as types from "../constants/todo";
 import * as actions from "../actions/todo";
-import { store } from "../store";
 
 export type TodoState = {
     list: string[]
@@ -24,11 +23,9 @@ export const todoReducer = (
             };
             case types.EDIT:{
                 const { index, content } = action;
-                // const index = action.index;
-                // const content = action.content;
 
                 const updateList = state.list.map((currentValue, itemIndex) => {
-                    if (itemIndex == index) {
+                    if (itemIndex === index) {
                         return content
                     }
                     return currentValue
@@ -40,8 +37,8 @@ export const todoReducer = (
             };
             case types.REMOVE:{
                 const { index } = action;
-                const updateList = state.list.filter((currentValue, itemIndex) => {
-                    return index != itemIndex;
+                const updateList = state.list.filter((_, itemIndex) => {
+                    return index !== itemIndex;
                 })
                 return {
                     ...state,

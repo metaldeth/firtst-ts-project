@@ -1,45 +1,63 @@
-import React, {useState} from "react";
+import {useState} from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import { ApplicationState } from "../../redux/store";
+import { useHistory } from "react-router-dom";
 import * as taskActions from "../../redux/actions/task";
-import { TaskState } from "../../redux/reducers/task";
-import { type } from "os";
-import { TaskItem } from "./TaskItem";
+import { ApplicationState } from "../../redux/store";
+import { Task } from "../../redux/reducers/task";
 
-interface Props {}
-
-interface StateProps {
-    task: TaskState['tasks']
+interface Props {
+    index?: number
 }
 
 type AddFn = (title: string, desc:string) => void
+type EditFn = (title:string, desc: string, index: number) => void
 
 interface DispatchProps {
-    add: AddFn
+    add: AddFn,
+    edit: EditFn
 }
 
-type TaskProps = DispatchProps & StateProps & Props
+interface StateProps {
+    task: Task | null,
+}
 
-const mapStateToProps = (state: ApplicationState, props: Props): StateProps => ({
-    task: state.task.tasks
-})
+type TaskProps = DispatchProps & Props & StateProps
+
+const mapStateToProps = (state: ApplicationState, props: Props): StateProps => {
+    if (props.index === undefined) return {
+        task: null
+    };
+    return {
+        task: state.task.tasks[props.index]
+    }
+}
 
 const mapDispatchToProps = (dispatch: Dispatch, props: Props): DispatchProps => ({
-    add: (title: string, desc:string) => dispatch(taskActions.addTask(title, desc))
+    add: (title: string, desc:string) => dispatch(taskActions.addTask(title, desc)),
+    edit: (title: string, desc: string, index:number) => dispatch(taskActions.editTask(title, desc, index))
 })
 
 
 const AddInner = (props: TaskProps) => {
-    const [title, setTitle] = useState('');
+    const [title, setTitle] = useState(props.task?.title ?? '');
+    const [desc, setDesc] = useState(props.task?.desc ?? '');
 
-    const [desc, setDesc] = useState('');
+    const history = useHistory();
+
+    let buttonName = props.index === undefined ? 'Add' : 'Edit'
 
     const addTask = () => {
         if (!title.length || !desc.length) return;
         setTitle('');
         setDesc('')
-        props.add(title, desc)
+        if (props.index === undefined) {
+            props.add(title, desc);
+            buttonName = 'Add'            
+        } else {
+            props.edit(title, desc, props.index);
+        }
+        history.replace('/task')
     }
 
     return (
@@ -52,7 +70,7 @@ const AddInner = (props: TaskProps) => {
                 value = {desc}
                 onChange = {(event) => setDesc(event.target.value)}
             />
-            <button onClick = {addTask}>add task</button>
+            <button onClick = {addTask}>{buttonName}</button>
         </>
     )
 }

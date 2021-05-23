@@ -1,39 +1,39 @@
-import { ADDTASK, EDITTASK, REMOVETASK } from "../constants/task";
+import { ADD_TASK, EDIT_TASK, REMOVE_TASK } from "../constants/task";
 
 export type AddTask = {
-    type: typeof ADDTASK,
+    type: typeof ADD_TASK,
     title: string,
     desc: string,
 }
 
 export type EditTask = {
-    type: typeof EDITTASK,
+    type: typeof EDIT_TASK,
     title: string,
     desc: string,
     indexTask: number
 }
 
 export type RemoveTask = {
-    type: typeof REMOVETASK,
+    type: typeof REMOVE_TASK,
     indexTask: number
 }
 
 export type TaskActions = AddTask | EditTask | RemoveTask;
 
 export const addTask = (title: string, desc: string): AddTask => ({
-    type: ADDTASK,
+    type: ADD_TASK,
     title,
     desc
 })
 
 export const editTask = (title: string, desc: string, indexTask: number): EditTask => ({
-    type: EDITTASK,
+    type: EDIT_TASK,
     title,
     desc,
     indexTask
 })
 
 export const removeTask = (indexTask: number): RemoveTask => ({
-    type: REMOVETASK,
+    type: REMOVE_TASK,
     indexTask
 })

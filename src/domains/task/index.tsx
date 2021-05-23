@@ -1,11 +1,10 @@
-import React, {useState} from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { ApplicationState } from "../../redux/store";
 import * as taskActions from "../../redux/actions/task";
 import { TaskState } from "../../redux/reducers/task";
-import { type } from "os";
 import { TaskItem } from "./TaskItem";
+import { Link } from "react-router-dom";
 
 interface Props {}
 
@@ -32,14 +31,16 @@ const mapDispatchToProps = (dispatch: Dispatch, props: Props): DispatchProps => 
 const TaskInner = (props: TaskProps) => {
     return(
         <>
+            <Link className='nav_item' to='/task/create'>create task</Link>
             {props.task.map((taskItem:any, index: number) => 
-            <TaskItem 
-                key= {index}
-                title= {taskItem.title}
-                desc= {taskItem.desc}
-                index= {index}
-                remove={() => props.remove(index)}
-            /> )}
+                <TaskItem 
+                    key= {index}
+                    title= {taskItem.title}
+                    desc= {taskItem.desc}
+                    index= {index}
+                    remove={() => props.remove(index)}
+                /> 
+            )}
         </>
     )
 }

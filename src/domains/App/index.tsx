@@ -1,10 +1,10 @@
-import { FC } from "react"
-import { Link, Route, Switch, useParams } from 'react-router-dom';
+import { Link, Route, Switch } from 'react-router-dom';
 import { Counter } from '../counter';
 import { Todo } from '../todo';
 import { Task } from "../task";
 import { AddTask } from "../task/add";
 import './App.sass';
+import { EditTask } from '../task/edit';
 
 // const TestComp: FC<{}> = () => {
 //   const params = useParams();
@@ -20,8 +20,7 @@ function App() {
         <Link className='nav_item' to='/'>Root</Link>
         <Link className='nav_item' to='/counter'>Counter</Link>
         <Link className='nav_item' to='/todo'>todo</Link>
-        <Link className='nav_item' to='/task'>watch task</Link>
-        <Link className='nav_item' to='/task/create'>create task</Link>
+        <Link className='nav_item' to='/task'>task</Link>
       </nav>
       <div className="App">
         <Switch>
@@ -38,7 +37,7 @@ function App() {
             <AddTask />
           </Route>
           <Route exact path="/task/:id">
-            
+            <EditTask />
           </Route>
           <Route exact path="/">
             Hello World

@@ -1,8 +1,7 @@
 import * as types from "../constants/task";
 import * as actions from "../actions/task";
-import { store } from "../store";
 
-type Task = {
+export type Task = {
     title: string,
     desc: string,
 }
@@ -20,7 +19,7 @@ export const taskReducer = (
     action: actions.TaskActions
 ): TaskState => {
     switch (action.type) {
-        case types.ADDTASK: {
+        case types.ADD_TASK: {
             const title = action.title;
             const desc = action.desc
             const task = {
@@ -32,7 +31,7 @@ export const taskReducer = (
                 tasks:[...state.tasks, task]
             }
         };
-        case types.EDITTASK: {
+        case types.EDIT_TASK: {
             const title = action.title;
             const desc = action.desc;
             const index = action.indexTask;
@@ -41,7 +40,7 @@ export const taskReducer = (
                 desc
             }
             const updateList = state.tasks.map((currentValue, itemIndex) => {
-                if (itemIndex == index) {
+                if (itemIndex === index) {
                     return task
                 }
                 return currentValue
@@ -51,10 +50,10 @@ export const taskReducer = (
                 tasks: updateList
             }
         }
-        case types.REMOVETASK: {
+        case types.REMOVE_TASK: {
             const index = action.indexTask;
             const updateList = state.tasks.filter((currentValue, itemIndex) => {
-                return index != itemIndex;
+                return index !== itemIndex;
             })
             return {
                 ...state,
